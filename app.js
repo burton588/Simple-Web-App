@@ -17,10 +17,9 @@ var app = express();
 
 
 // view engine setup
-/* app.set('views', path.join(__dirname, 'app_server', 'views'));
+app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'hbs'); 
 
-require('./app_server/views/helpers/hbsh.js');  */
 
 
 app.disable('x-powered-by');
@@ -37,7 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_public', "build")));
-app.use(cors());
+
 
 app.use(passport.initialize());
 
