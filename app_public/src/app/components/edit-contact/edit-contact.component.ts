@@ -27,17 +27,18 @@ export class EditContactComponent implements OnInit {
     "phoneNumber": ""
   };
 
-  public phoneNumberRegex = /^\d+$/;
+  public phoneNumberRegex = new RegExp('^[0-9]+$');
   public checkData(): void {
     if(!this.contact.firstname || !this.contact.lastname || !this.contact.phoneNumber){
       this.message = "Please fill all input boxes!";
       return;
     }
-    if(!this.phoneNumberRegex.test(this.contact.phoneNumber)){
+    else if(!this.phoneNumberRegex.test(this.contact.phoneNumber)){
       this.message = "Please fill in the form correctly."
     }
-    this.sendContactData();
-
+    else{
+      this.sendContactData();
+    }
   }
 
   public getContact(): void{
@@ -68,7 +69,7 @@ export class EditContactComponent implements OnInit {
         setTimeout(() => {
           this.router.navigateByUrl("contacts")
         },
-        3000);
+        2000);
 
       }); 
   }
@@ -86,7 +87,7 @@ export class EditContactComponent implements OnInit {
         setTimeout(() => {
           this.router.navigateByUrl("contacts")
         },
-        3000);
+        2000);
 
       }); 
   }

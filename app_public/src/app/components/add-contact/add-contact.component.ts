@@ -33,11 +33,12 @@ export class AddContactComponent implements OnInit {
       this.message = "Please fill all input boxes!";
       return;
     }
-    if(!this.phoneNumberRegex.test(this.contactNew.phoneNumber)){
+    else if(!this.phoneNumberRegex.test(this.contactNew.phoneNumber)){
       this.message = "Please fill in the form correctly."
     }
+    else{
     this.sendContactData();
-
+    }
   }
 
   private sendContactData(): void{
@@ -53,7 +54,7 @@ export class AddContactComponent implements OnInit {
         setTimeout(() => {
           this.router.navigateByUrl("contacts")
         },
-        3000);
+        2000);
 
         
       }); 
