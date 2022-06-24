@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         this.message = napaka.toString();
         return throwError(() => napaka);
       })).subscribe(() => {
-       this.router.navigateByUrl("/register"); 
+       this.router.navigateByUrl("/contacts"); 
         
       });
   }
@@ -51,6 +51,9 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if(this.authenticationService.isSignedIn()){
+      this.router.navigateByUrl("/contacts")
+    }
   }
 
 }

@@ -7,6 +7,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { AddContactComponent } from './components/add-contact/add-contact.component';
+import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     RegisterComponent,
     ContactsComponent,
+    AddContactComponent,
+    EditContactComponent,
     
   ],
   imports: [
@@ -24,6 +28,10 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'contacts', component: ContactsComponent },
+      { path: 'addContact', component: AddContactComponent },
+      { path: 'editContact/:contactId', component: EditContactComponent },
+
     ]),
   ],
   providers: [],

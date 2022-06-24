@@ -14,7 +14,7 @@ const ctrlUsers = require('../controllers/users.js');
 const ctrlContacts = require('../controllers/contacts.js')
 
 
-router.get('/users',
+router.get('/users', 
     ctrlUsers.seznamUporabnikov);
 
 
@@ -23,10 +23,11 @@ router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
 
-router.get('/contacts', ctrlContacts.listOfContactsForUser);
-router.post('/contacts', ctrlContacts.createContact);
-router.get('/contacts/:contactId', ctrlContacts.getSingleContact);
-router.put('/contacts/:contactId', ctrlContacts.updateContact);
+router.get('/contacts', auth ,ctrlContacts.listOfContactsForUser);
+router.post('/contacts', auth, ctrlContacts.createContact);
+router.get('/contacts/:contactId', auth, ctrlContacts.getSingleContact);
+router.put('/contacts/:contactId', auth, ctrlContacts.updateContact);
+router.delete('/contacts/:contactId', auth, ctrlContacts.deleteContact);
 
 
 module.exports = router;

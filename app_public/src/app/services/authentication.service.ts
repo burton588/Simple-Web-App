@@ -34,12 +34,35 @@ export class AuthenticationService {
       }))
   }
  
-  /* public getToken(): string {
-    return this.storage.getItem('simple-token');
-  } */
 
   public saveToken(token: string): void {
     this.storage.setItem('simple-token', token);
+  }
+
+  public signOut(): void {
+    this.storage.removeItem('simple-token');
+  }
+
+  public getToken() {
+    return this.storage.getItem('simple-token');
+  }
+
+  public isSignedIn(): boolean {
+    const token = this.getToken();
+    if (token) {
+      const value = JSON.parse(atob(token.split('.')[1]));
+      return value.exp > (Date.now() / 1000);
+    } else {
+      return false;
+    }
+  }
+
+  public getCurrentUser(): any {
+    if (this.isSignedIn()) {
+      const token = this.getToken()!;
+      const {_id, userName } = JSON.parse(atob(token.split('.')[1]));
+      return { _id, userName} as User;
+    }
   }
 
 }

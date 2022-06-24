@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 const Contact = mongoose.model('Contact');
+const atob = require('atob');
 
 const listOfContactsForUser = (req, res) => {
-    console.log(req.body.userId);
+    var token = req.headers.authorization;
+    console.log(token);
+    const {_id, userName } = JSON.parse(atob(token.split('.')[1]));
     Contact
-        .find({ 'user': req.body.userId})
+        .find({ 'user': _id})
         .populate('user')
         .exec((error, contacts) => {
             if(error){
@@ -31,12 +34,15 @@ const getSingleContact = (req, res) => {
 };
 
 const createContact = (req, res) => {
+    var token = req.headers.authorization;
+    console.log(token);
+    const {_id, userName } = JSON.parse(atob(token.split('.')[1]));
     Contact
         .create({
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phoneNumber: req.body.phoneNumber,
-            user: req.body.userId
+            user: _id
         }, (error, contact) => {
             if(error){
                 res.status(500).json(error);
@@ -66,9 +72,22 @@ const updateContact = (req, res) => {
         });
 };
 
+
+const deleteContact = (req, res) => {
+        Contact
+            .findByIdAndRemove(req.params.contactId)
+            .exec((error) => {
+                if(error){
+                    return res.status(500).json(error);
+                }
+                res.status(204).json(null);
+            });
+}
+
 module.exports = {
     listOfContactsForUser,
     getSingleContact,
     createContact,
-    updateContact
+    updateContact,
+    deleteContact
 };

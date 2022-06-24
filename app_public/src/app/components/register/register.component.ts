@@ -41,11 +41,14 @@ export class RegisterComponent implements OnInit {
         this.message = error.toString();
         return throwError(() => error);
       })).subscribe(() => {
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/contacts");
       });
   }
 
   ngOnInit(): void {
+    if(this.authenticationService.isSignedIn()){
+      this.router.navigateByUrl("/contacts");
+    }
   }
 
 

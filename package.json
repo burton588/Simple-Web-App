@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "atob": "^2.1.2",
     "cookie-parser": "*",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
