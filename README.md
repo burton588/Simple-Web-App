@@ -16,3 +16,5 @@ Simple webb aplication, that allows users to register and then create, edit or d
     npm install
     ng serve
     ```
+3. open http://localhost:4200 in browser
+4. use application as intended
